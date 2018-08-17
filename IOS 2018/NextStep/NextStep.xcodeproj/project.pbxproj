@@ -1,0 +1,636 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E405614AD1FE30564BECEBF /* libPods-NextStep.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B73C79B2EA9A402BF091F2CB /* libPods-NextStep.a */; };
+		A7F390F12123C15700E3AD0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F390F02123C15700E3AD0A /* AppDelegate.m */; };
+		A7F390F42123C15800E3AD0A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F390F32123C15800E3AD0A /* ViewController.m */; };
+		A7F390F72123C15800E3AD0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F390F52123C15800E3AD0A /* Main.storyboard */; };
+		A7F390F92123C16700E3AD0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7F390F82123C16700E3AD0A /* Assets.xcassets */; };
+		A7F390FC2123C16700E3AD0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7F390FA2123C16700E3AD0A /* LaunchScreen.storyboard */; };
+		A7F390FF2123C16700E3AD0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F390FE2123C16700E3AD0A /* main.m */; };
+		A7F391092123C16700E3AD0A /* NextStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F391082123C16700E3AD0A /* NextStepTests.m */; };
+		A7F391142123C16700E3AD0A /* NextStepUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F391132123C16700E3AD0A /* NextStepUITests.m */; };
+		A7F391232123C4CD00E3AD0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F391222123C4CD00E3AD0A /* HomeViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7F391052123C16700E3AD0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7F390E42123C15700E3AD0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7F390EB2123C15700E3AD0A;
+			remoteInfo = NextStep;
+		};
+		A7F391102123C16700E3AD0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7F390E42123C15700E3AD0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7F390EB2123C15700E3AD0A;
+			remoteInfo = NextStep;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A7F390EC2123C15700E3AD0A /* NextStep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextStep.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7F390EF2123C15700E3AD0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A7F390F02123C15700E3AD0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A7F390F22123C15700E3AD0A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A7F390F32123C15800E3AD0A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A7F390F62123C15800E3AD0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7F390F82123C16700E3AD0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A7F390FB2123C16700E3AD0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A7F390FD2123C16700E3AD0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7F390FE2123C16700E3AD0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A7F391042123C16700E3AD0A /* NextStepTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextStepTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7F391082123C16700E3AD0A /* NextStepTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NextStepTests.m; sourceTree = "<group>"; };
+		A7F3910A2123C16700E3AD0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7F3910F2123C16700E3AD0A /* NextStepUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextStepUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7F391132123C16700E3AD0A /* NextStepUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NextStepUITests.m; sourceTree = "<group>"; };
+		A7F391152123C16700E3AD0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7F391212123C4CD00E3AD0A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		A7F391222123C4CD00E3AD0A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		B73C79B2EA9A402BF091F2CB /* libPods-NextStep.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NextStep.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8F5C42D8757566EE2BF6E8C /* Pods-NextStep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextStep.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextStep/Pods-NextStep.release.xcconfig"; sourceTree = "<group>"; };
+		F0F9267886B45BEAB506AC0B /* Pods-NextStep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextStep.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextStep/Pods-NextStep.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7F390E92123C15700E3AD0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E405614AD1FE30564BECEBF /* libPods-NextStep.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F391012123C16700E3AD0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F3910C2123C16700E3AD0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E0369106FD90AB68B22333D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B73C79B2EA9A402BF091F2CB /* libPods-NextStep.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3640190576A7A8B3CA6CD859 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0F9267886B45BEAB506AC0B /* Pods-NextStep.debug.xcconfig */,
+				D8F5C42D8757566EE2BF6E8C /* Pods-NextStep.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A7F390E32123C15700E3AD0A = {
+			isa = PBXGroup;
+			children = (
+				A7F390EE2123C15700E3AD0A /* NextStep */,
+				A7F391072123C16700E3AD0A /* NextStepTests */,
+				A7F391122123C16700E3AD0A /* NextStepUITests */,
+				A7F390ED2123C15700E3AD0A /* Products */,
+				3640190576A7A8B3CA6CD859 /* Pods */,
+				2E0369106FD90AB68B22333D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A7F390ED2123C15700E3AD0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7F390EC2123C15700E3AD0A /* NextStep.app */,
+				A7F391042123C16700E3AD0A /* NextStepTests.xctest */,
+				A7F3910F2123C16700E3AD0A /* NextStepUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7F390EE2123C15700E3AD0A /* NextStep */ = {
+			isa = PBXGroup;
+			children = (
+				A7F390EF2123C15700E3AD0A /* AppDelegate.h */,
+				A7F390F02123C15700E3AD0A /* AppDelegate.m */,
+				A7F390F22123C15700E3AD0A /* ViewController.h */,
+				A7F390F32123C15800E3AD0A /* ViewController.m */,
+				A7F391212123C4CD00E3AD0A /* HomeViewController.h */,
+				A7F391222123C4CD00E3AD0A /* HomeViewController.m */,
+				A7F390F52123C15800E3AD0A /* Main.storyboard */,
+				A7F390F82123C16700E3AD0A /* Assets.xcassets */,
+				A7F390FA2123C16700E3AD0A /* LaunchScreen.storyboard */,
+				A7F390FD2123C16700E3AD0A /* Info.plist */,
+				A7F390FE2123C16700E3AD0A /* main.m */,
+			);
+			path = NextStep;
+			sourceTree = "<group>";
+		};
+		A7F391072123C16700E3AD0A /* NextStepTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7F391082123C16700E3AD0A /* NextStepTests.m */,
+				A7F3910A2123C16700E3AD0A /* Info.plist */,
+			);
+			path = NextStepTests;
+			sourceTree = "<group>";
+		};
+		A7F391122123C16700E3AD0A /* NextStepUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A7F391132123C16700E3AD0A /* NextStepUITests.m */,
+				A7F391152123C16700E3AD0A /* Info.plist */,
+			);
+			path = NextStepUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7F390EB2123C15700E3AD0A /* NextStep */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7F391182123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStep" */;
+			buildPhases = (
+				631E0DCB6545D4BC299A6E47 /* [CP] Check Pods Manifest.lock */,
+				A7F390E82123C15700E3AD0A /* Sources */,
+				A7F390E92123C15700E3AD0A /* Frameworks */,
+				A7F390EA2123C15700E3AD0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NextStep;
+			productName = NextStep;
+			productReference = A7F390EC2123C15700E3AD0A /* NextStep.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A7F391032123C16700E3AD0A /* NextStepTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7F3911B2123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStepTests" */;
+			buildPhases = (
+				A7F391002123C16700E3AD0A /* Sources */,
+				A7F391012123C16700E3AD0A /* Frameworks */,
+				A7F391022123C16700E3AD0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7F391062123C16700E3AD0A /* PBXTargetDependency */,
+			);
+			name = NextStepTests;
+			productName = NextStepTests;
+			productReference = A7F391042123C16700E3AD0A /* NextStepTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A7F3910E2123C16700E3AD0A /* NextStepUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7F3911E2123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStepUITests" */;
+			buildPhases = (
+				A7F3910B2123C16700E3AD0A /* Sources */,
+				A7F3910C2123C16700E3AD0A /* Frameworks */,
+				A7F3910D2123C16700E3AD0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7F391112123C16700E3AD0A /* PBXTargetDependency */,
+			);
+			name = NextStepUITests;
+			productName = NextStepUITests;
+			productReference = A7F3910F2123C16700E3AD0A /* NextStepUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7F390E42123C15700E3AD0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = liubang;
+				TargetAttributes = {
+					A7F390EB2123C15700E3AD0A = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					A7F391032123C16700E3AD0A = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = A7F390EB2123C15700E3AD0A;
+					};
+					A7F3910E2123C16700E3AD0A = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = A7F390EB2123C15700E3AD0A;
+					};
+				};
+			};
+			buildConfigurationList = A7F390E72123C15700E3AD0A /* Build configuration list for PBXProject "NextStep" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A7F390E32123C15700E3AD0A;
+			productRefGroup = A7F390ED2123C15700E3AD0A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7F390EB2123C15700E3AD0A /* NextStep */,
+				A7F391032123C16700E3AD0A /* NextStepTests */,
+				A7F3910E2123C16700E3AD0A /* NextStepUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7F390EA2123C15700E3AD0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F390FC2123C16700E3AD0A /* LaunchScreen.storyboard in Resources */,
+				A7F390F92123C16700E3AD0A /* Assets.xcassets in Resources */,
+				A7F390F72123C15800E3AD0A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F391022123C16700E3AD0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F3910D2123C16700E3AD0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		631E0DCB6545D4BC299A6E47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NextStep-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7F390E82123C15700E3AD0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F390F42123C15800E3AD0A /* ViewController.m in Sources */,
+				A7F390FF2123C16700E3AD0A /* main.m in Sources */,
+				A7F390F12123C15700E3AD0A /* AppDelegate.m in Sources */,
+				A7F391232123C4CD00E3AD0A /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F391002123C16700E3AD0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F391092123C16700E3AD0A /* NextStepTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F3910B2123C16700E3AD0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F391142123C16700E3AD0A /* NextStepUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7F391062123C16700E3AD0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7F390EB2123C15700E3AD0A /* NextStep */;
+			targetProxy = A7F391052123C16700E3AD0A /* PBXContainerItemProxy */;
+		};
+		A7F391112123C16700E3AD0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7F390EB2123C15700E3AD0A /* NextStep */;
+			targetProxy = A7F391102123C16700E3AD0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A7F390F52123C15800E3AD0A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7F390F62123C15800E3AD0A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A7F390FA2123C16700E3AD0A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7F390FB2123C16700E3AD0A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7F391162123C16700E3AD0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A7F391172123C16700E3AD0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7F391192123C16700E3AD0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0F9267886B45BEAB506AC0B /* Pods-NextStep.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStep/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStep;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7F3911A2123C16700E3AD0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8F5C42D8757566EE2BF6E8C /* Pods-NextStep.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStep/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStep;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A7F3911C2123C16700E3AD0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStepTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStepTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextStep.app/NextStep";
+			};
+			name = Debug;
+		};
+		A7F3911D2123C16700E3AD0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStepTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStepTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextStep.app/NextStep";
+			};
+			name = Release;
+		};
+		A7F3911F2123C16700E3AD0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStepUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStepUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NextStep;
+			};
+			name = Debug;
+		};
+		A7F391202123C16700E3AD0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7HJ4JEE2L9;
+				INFOPLIST_FILE = NextStepUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.www.baimi.NextStepUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NextStep;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7F390E72123C15700E3AD0A /* Build configuration list for PBXProject "NextStep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F391162123C16700E3AD0A /* Debug */,
+				A7F391172123C16700E3AD0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7F391182123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStep" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F391192123C16700E3AD0A /* Debug */,
+				A7F3911A2123C16700E3AD0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7F3911B2123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStepTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F3911C2123C16700E3AD0A /* Debug */,
+				A7F3911D2123C16700E3AD0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7F3911E2123C16700E3AD0A /* Build configuration list for PBXNativeTarget "NextStepUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F3911F2123C16700E3AD0A /* Debug */,
+				A7F391202123C16700E3AD0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7F390E42123C15700E3AD0A /* Project object */;
+}
