@@ -1,0 +1,38 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++7C9F2A7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++7C9F2A7" : {
+
+    },
+    "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++6142653" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++7C9F2A7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D8CE7E30-A21D-4611-895E-7933648E99ED",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++7C9F2A7" : "iOS_BaiMi\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BaiMi",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BaiMi.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/192.168.17.229\/svn\/yanfabu",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++6142653"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/192.168.17.229\/svn\/yanfabu",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++7C9F2A7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/192.168.17.229\/svn\/yanfabu",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3a3ee408-4da9-8644-af16-2d3215f3e8bc++1166+++CBD7CEB"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+//
+//  PrefixHeader.pch
+//  BaiMi
+//
+//  Created by licl on 16/6/23.
+//  Copyright © 2016年 licl. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "HXMacro.h"
+#import "HXMacroKeys.h"
+#import "HXError.h"
+#import "HXHttpUtils.h"
+#import "NSDate+Utils.h"
+#import "HXNSStringUtil.h"
+#import "HXAlertViewEx.h"
+#import "HXLoadingImageView.h"
+#import "UIKit+AFNetworking.h"
+#endif /* PrefixHeader_h */
+
+
+#ifndef __IPHONE_7_0
+#warning "This project uses features only available in iOS SDK 7.0 and later."
+#endif
+
+
+#define SUCCESS 1   //用于判断接口返回的成功标记 是否为1，为1则成功
+#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT   [UIScreen mainScreen].bounds.size.height
+
+//默认图片
+#define HXDefaultLogoImg [UIImage imageNamed:@"userLogo.png"]
+#define  HXDefaultImg  [UIImage imageNamed:@"defaultImg.png"]
+#define  BackGroundColor [UIColor colorWithRed:241/255.0 green:241/255.0 blue:241/255.0 alpha:1]
+#define  BolderColor  [UIColor colorWithRed:209/255.0 green:209/255.0 blue:209/255.0 alpha:1]
+#define  PlaceHolderColor [UIColor colorWithRed:189/255.0 green:189/255.0 blue:195/255.0 alpha:1]
+#define  LightBlueColor [UIColor colorWithRed:20.0/255 green:152.0/255 blue:253.0/255 alpha:1]
+
+#define RGBA(r,g,b,a)      [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
+
+#define ViewFrameY_H(view) (view.frame.size.height + view.frame.origin.y)
+#define ViewFrameX_W(view) (view.frame.size.width + view.frame.origin.x)
+#define ViewFrame_W(view) view.frame.size.width
+#define ViewFrame_H(view) view.frame.size.height
+#define ViewFrame_X(view) view.frame.origin.x
+#define ViewFrame_Y(view) view.frame.origin.y
+
+//计算字符自适应Size
+#define STRING_SIZE_FONT(_with_,_string_,_fize_)  [_string_ boundingRectWithSize:CGSizeMake(_with_, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:_fize_]} context:nil].size
+#endif

@@ -1,0 +1,49 @@
+//
+//  HXPayHelper.h
+//  BaiMi
+//
+//  Created by licl on 16/8/3.
+//  Copyright © 2016年 licl. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "HXPayResult.h"
+
+//支付类型
+typedef NS_ENUM(NSInteger,HXPayType){
+    HXPayTypeBalance=0,//余额支付
+    HXPayTypeAlipay =1, //支付宝支付
+    HXPayTypeWeChat=2,//微信支付
+};
+
+
+//支付结果代理
+@protocol HXPayHelperDelegate <NSObject>
+-(void)payResult:(HXPayResult*)payResult;  //返回格式：{@“errCode”:(0成功，1失败),@"errStr":@"错误描述"}
+@end
+
+
+@interface HXPayHelper : NSObject
+@property(assign,nonatomic)id<HXPayHelperDelegate>delegate;
+
++(HXPayHelper*)sharePayHelper;
+
+//开始支付 传入参数：payType:支付类型（余额、支付宝、微信支付）,fee:支付费用 ,businessType:账单业务类型 businessNo:订单编号 payVC:发起支付的viewController
+-(void)payDealOfPayType:(HXPayType)payType payFee:(float)fee businessType:(HXBillType)businessType businessNo:(NSString*)businessNo payVC:(UIViewController*)payVC;
+
+
+
+//微信支付sdk反馈
+-(void)weixinSdkPayResp:(PayResp*)resp;
+
+//支付结果推送消息（服务器主动推送结果）
+-(void)payResultNotification:(NSDictionary*)dict;
+//appdelegate 阿里支付 openUrl 回调反馈
+-(void)payCallBackResult:(HXPayResult*)payResult;
+//服务器未推送结果，手动去服务器查询
+-(void)getPayResultHttp;
+
+@end

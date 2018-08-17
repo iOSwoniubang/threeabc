@@ -1,0 +1,204 @@
+//
+//  HXGetSchoolViewController.m
+//  BaiMi
+//
+//  Created by HXMAC on 16/7/18.
+//  Copyright © 2016年 licl. All rights reserved.
+//
+
+#import "HXGetSchoolViewController.h"
+#import "AMapLocationKit.h"
+#import "AMapFoundationKit.h"
+#import "HXUserLocation.h"
+#import "HXGetAreaViewController.h"
+@interface HXGetSchoolViewController ()<AMapLocationManagerDelegate,AMapSearchDelegate,UITableViewDataSource,UITableViewDelegate>
+@property(strong,nonatomic)AMapLocationManager*locationManager;
+@property(strong,nonatomic)AMapSearchAPI*searchAPI;
+@property(strong,nonatomic)HXLoginUser*user;
+@property(assign,nonatomic)BOOL hasLocation;
+@property(strong,nonatomic)UILabel*currentPointLab;
+
+@property(strong,nonatomic)UITableView*tableView;
+@property(strong,nonatomic)AMapCloudPOI *poi;
+@property(strong,nonatomic)NSMutableArray*nearList;
+@end
+
+@implementation HXGetSchoolViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title=@"学校";
+    self.view.backgroundColor=BackGroundColor;
+    _nearList = [NSMutableArray array];
+    _user=[NSUserDefaultsUtil getLoginUser];
+    
+    self.tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
+    [self.view addSubview:self.tableView];
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    [self configLocationManager];
+}
+//定位
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    //开始定位
+    [self.locationManager startUpdatingLocation];
+    
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    //定位结果
+    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    
+    //停止定位
+    [self.locationManager stopUpdatingLocation];
+    if (!_hasLocation) {
+        HXUserLocation*userLocation=[HXUserLocation new];
+        userLocation.latitude=location.coordinate.latitude;
+        userLocation.longitude=location.coordinate.longitude;
+        [NSUserDefaultsUtil setUserLocation:userLocation];
+        
+//        NSString *stringUrl = [NSString stringWithFormat:@"http://yuntuapi.amap.com/datasearch/around?tableid=57870971305a2a4e4fef4c48&keywords=&center=%f,%f&radius=5000&limit=100&page=1&filter=type:1&key=762f74e5e49dce15562247806f1d50be",userLocation.latitude,userLocation.longitude];
+//        [HXHttpUtils requestJsonGetWithUrlStr:stringUrl params:nil onComplete:^(NSError *error, NSDictionary *resultJson) {
+//            NSLog(@"云图 %@ ",resultJson);
+//        }];
+        [self searchNearestPointFromMap_CloudWithUserLocation:userLocation];
+        _hasLocation=YES;
+    }
+}
+
+
+
+//搜索附近大学
+-(void)searchNearestPointFromMap_CloudWithUserLocation:(HXUserLocation*)userLocation{
+    //    //配置用户Key
+//    [AMapServices sharedServices].apiKey = GD_Map_Key;
+    
+    //初始化检索对象
+    _searchAPI = [[AMapSearchAPI alloc] init];
+    _searchAPI.delegate = self;
+    
+    //构造AMapCloudPOIAroundSearchRequest对象，设置云周边检索请求参数
+    AMapCloudPOIAroundSearchRequest *request = [[AMapCloudPOIAroundSearchRequest alloc] init];
+    request.tableID = GD_MapCloud_TableId;//在数据管理台中取得
+    request.center =  [AMapGeoPoint locationWithLatitude:userLocation.latitude  longitude:userLocation.longitude];
+    request.radius = 5000;
+    //    request.keywords = @"";
+    NSString*filterStr=[NSString stringWithFormat:@"type:1"];//type（1.学校,2网点）
+    [request setFilter:@[filterStr]];
+    [request setOffset:20];
+    [request setPage:1];
+    //发起云本地检索
+    [_searchAPI AMapCloudPOIAroundSearch: request];
+}
+
+//实现云检索对应的回调函数
+- (void)onCloudSearchDone:(AMapCloudSearchBaseRequest *)request response:(AMapCloudPOISearchResponse *)response
+{
+    if(response.POIs.count == 0)
+    {
+        return;
+    }
+    
+    for (AMapCloudPOI *p in response.POIs) {
+        NSLog(@"poi = %d  %@",(int)p.uid ,p.name);
+        [_nearList addObject:p];
+    }
+    [self.tableView reloadData];
+
+}
+
+
+
+-(void)btnClicked:(id)sender{
+    [self configLocationManager];
+}
+
+
+#pragma mark--UITableViewDataSource & UITableViewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _nearList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 74;
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 1;
+//}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AMapPOI*poi=[_nearList objectAtIndex:indexPath.row];
+    static NSString*cellIdentifier=@"cell";
+    UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    cell.textLabel.text=poi.name;
+//    if (poi.uid==_poi.uid)
+//        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+//    else
+        cell.accessoryType=UITableViewCellAccessoryNone;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _poi=[_nearList objectAtIndex:indexPath.row];
+    NSDictionary *dict = _poi.customFields;
+    
+    HXGetAreaViewController *getArea = [[HXGetAreaViewController alloc]init];
+    getArea.searchNum = [dict objectForKey:@"code"];
+    getArea.sourceArray = [NSMutableArray arrayWithObjects:_poi, nil];
+    getArea.type = HXSearchTypeArea;
+    [self.navigationController pushViewController:getArea animated:YES];
+//    NSLog(@"name = %@",_poi.name);
+//    [self.tableView reloadData];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_SCHOOL" object:_poi];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,12 @@
+platform :ios, '7.0'
+
+target 'BaiMi' do   
+pod 'AFNetworking', '~> 3.1.0’
+pod 'MJRefresh', '~> 3.1.9'
+pod 'Masonry'
+pod 'FMDB', '~> 2.6.2'
+pod 'AMapSearch'
+pod 'AMapLocation'
+pod 'UMengSocialCOM', '~> 5.2.1'
+pod 'GTSDK', '1.4.3-noidfa'
+end

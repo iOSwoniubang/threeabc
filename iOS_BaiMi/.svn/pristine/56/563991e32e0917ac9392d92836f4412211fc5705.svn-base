@@ -1,0 +1,272 @@
+//
+//  HXSelePointViewController.m
+//  BaiMi
+//
+//  Created by licl on 16/7/16.
+//  Copyright © 2016年 licl. All rights reserved.
+//
+
+#import "HXSelePointViewController.h"
+#import "AMapLocationKit.h"
+#import "AMapFoundationKit.h"
+#import "HXUserLocation.h"
+#import "HXPlace.h"
+
+
+@interface HXSelePointViewController ()<AMapLocationManagerDelegate,AMapSearchDelegate,UITableViewDataSource,UITableViewDelegate>
+@property(strong,nonatomic)AMapLocationManager*locationManager;
+@property(strong,nonatomic)AMapSearchAPI*searchAPI;
+@property(strong,nonatomic)HXLoginUser*user;
+@property(assign,nonatomic)BOOL hasLocation;
+@property(strong,nonatomic)UILabel*currentPointLab;
+
+@property(strong,nonatomic)UITableView*tableView;
+@end
+
+@implementation HXSelePointViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title=@"附近网点";
+    self.view.backgroundColor=BackGroundColor;
+    _user=[NSUserDefaultsUtil getLoginUser];
+    self.tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
+    [self.view addSubview:self.tableView];
+    if(_nearList.count==0)
+        [self configLocationManager];
+}
+
+
+//定位
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
+    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    
+    //开始定位
+    [self.locationManager startUpdatingLocation];
+    
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didFailWithError:(NSError *)error
+{
+    //定位错误
+    NSLog(@"%s, amapLocationManager = %@, error = %@", __func__, [manager class], error);
+}
+
+- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
+{
+    //定位结果
+    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
+    
+    //停止定位
+    [self.locationManager stopUpdatingLocation];
+    if (!_hasLocation) {
+        HXUserLocation*userLocation=[HXUserLocation new];
+        userLocation.latitude=location.coordinate.latitude;
+        userLocation.longitude=location.coordinate.longitude;
+        [NSUserDefaultsUtil setUserLocation:userLocation];
+        [self searchNearestPointFromMap_CloudWithUserLocation:userLocation];
+        _hasLocation=YES;
+    }
+}
+
+
+
+//云图搜索最近网点
+-(void)searchNearestPointFromMap_CloudWithUserLocation:(HXUserLocation*)userLocation{
+    //    //配置用户Key
+//    [AMapServices sharedServices].apiKey = GD_Map_Key;
+    
+    //初始化检索对象
+    _searchAPI = [[AMapSearchAPI alloc] init];
+    _searchAPI.delegate = self;
+    
+    //构造AMapCloudPOIAroundSearchRequest对象，设置云周边检索请求参数
+    AMapCloudPOIAroundSearchRequest *request = [[AMapCloudPOIAroundSearchRequest alloc] init];
+    request.tableID = GD_MapCloud_TableId;//在数据管理台中取得
+    request.center =  [AMapGeoPoint locationWithLatitude:userLocation.latitude  longitude:userLocation.longitude];
+    request.radius = 5000;
+    //    request.keywords = @"";
+    NSString*filterStr=[NSString stringWithFormat:@"type:2"]; //type:(1.学校，2.网点)
+    [request setFilter:@[filterStr]];
+    [request setOffset:20];
+    [request setPage:1];
+    //发起云本地检索
+    [_searchAPI AMapCloudPOIAroundSearch: request];
+}
+
+
+//实现云检索对应的回调函数
+- (void)onCloudSearchDone:(AMapCloudSearchBaseRequest *)request response:(AMapCloudPOISearchResponse *)response
+{
+    if(response.POIs.count == 0)
+    {
+        return;
+    }
+    //获取云图数据并显示
+    NSMutableArray*cloudPOIs=[response.POIs mutableCopy];
+    if (cloudPOIs.count>0) {
+        NSArray *sortDescriptors=[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"distance" ascending:YES]];
+        [cloudPOIs sortUsingDescriptors:sortDescriptors];
+    }
+    _nearList=[cloudPOIs mutableCopy];
+    for(AMapCloudPOI*poi in cloudPOIs){
+        if ([_user.pointNo isEqualToString:[poi.customFields objectForKey:@"code"]]) {
+            [_nearList removeObject:poi];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+
+- (void)cloudRequest:(id)cloudSearchRequest error:(NSError *)error
+{
+    NSLog(@"CloudRequestError:{Code: %ld; Description: %@}", (long)error.code, error.localizedDescription);
+}
+
+
+-(void)updatePoint{
+    //网点修改
+    if (_poi) {
+        NSString*sKey=[HXNSStringUtil getSkeyByParamInfo:@[_user.phoneNumber,[_poi.customFields objectForKey:@"code"],_user.token]];
+        [HXHttpUtils requestJsonPostWithUrlStr:@"/user/editBindingPoint" params:@{@"phoneNumber":_user.phoneNumber,@"sKey":sKey,@"pointNo":[NSString stringWithFormat:@"%@",[_poi.customFields objectForKey:@"code"]]} onComplete:^(NSError *error, NSDictionary *resultJson) {
+            if (error) {
+                [HXAlertViewEx showInTitle:nil Message:HXCodeString(error.code) ViewController:self];
+            }else{
+                NSLog(@"修改成功");
+                _user.pointNo=[_poi.customFields objectForKey:@"code"];
+                _user.pointName=_poi.name;
+                
+                HXPlace*place=[HXPlace  new];
+                place.province=[_poi.customFields objectForKey:@"_province"];
+                place.city=[_poi.customFields objectForKey:@"_city"];
+                place.area=[_poi.customFields objectForKey:@"_district"];
+                
+                NSString*subStr=[_poi.address stringByReplacingOccurrencesOfString:place.province withString:@""];
+                subStr=[subStr stringByReplacingOccurrencesOfString:place.city withString:@""];
+                subStr=[subStr stringByReplacingOccurrencesOfString:place.area withString:@""];
+                place.detailAddress=subStr;
+                NSDictionary*pointPlaceDic=@{@"province":place.province,@"city":place.city,@"area":place.area,@"address":place.detailAddress};
+                _user.pointAddressJsonStr=[HXNSStringUtil getJsonStringFromDicOrArray:pointPlaceDic];
+                
+                [NSUserDefaultsUtil setLoginUser:_user];
+                _currentPointLab.text=[NSString stringWithFormat:@"当前:%@",_poi.name];
+                if ([_delegate respondsToSelector:@selector(selectVC:NewPoint:pointPlace:)]) {
+                    [_delegate selectVC:self NewPoint:_poi pointPlace:place];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    }
+}
+
+
+-(void)btnClicked:(id)sender{
+    _hasLocation=NO;
+    [self configLocationManager];
+}
+
+
+#pragma mark--UITableViewDataSource & UITableViewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView*bgView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 74)];
+    bgView.backgroundColor=BackGroundColor;
+    UIView*pointView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    pointView.backgroundColor=[UIColor whiteColor];
+    UIImageView*imgView=[[UIImageView alloc] initWithFrame:CGRectMake(5, 12, 20, 20)];
+    imgView.image=[UIImage imageNamed:@"ico_weizhi.png"];
+    [pointView addSubview:imgView];
+    _currentPointLab=[[UILabel alloc] initWithFrame:CGRectMake(ViewFrameX_W(imgView)+5, 12, pointView.frame.size.width-ViewFrameX_W(imgView)-5-85, 21)];
+    _currentPointLab.text=[NSString stringWithFormat:@"当前:%@",_user.pointName?_user.pointName:@""];
+    [pointView addSubview:_currentPointLab];
+    UIButton*btn=[[UIButton alloc] initWithFrame:CGRectMake(pointView.frame.size.width-85, 0, 80, 44)];
+    [btn setTitle:@"重新定位" forState:UIControlStateNormal];
+    btn.titleLabel.font=[UIFont systemFontOfSize:16.f];
+    [btn setTitleColor:LightBlueColor forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [btn setImage:[UIImage imageNamed:@"ico_dingwei.png"] forState:UIControlStateNormal];
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 80-15, 0, 0)];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -25, 0, 0)];
+    [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [pointView addSubview:btn];
+    [bgView addSubview:pointView];
+    
+    UILabel*label=[[UILabel alloc] initWithFrame:CGRectMake(5, bgView.frame.size.height-25, 100, 20)];
+    label.font=[UIFont systemFontOfSize:15.f];
+    label.textColor=[UIColor grayColor];
+    label.text=@"附近";
+    [bgView addSubview:label];
+   
+    return bgView;
+}
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   return _nearList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 74;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AMapCloudPOI*poi=[_nearList objectAtIndex:indexPath.row];
+    static NSString*cellIdentifier=@"cell";
+    UITableViewCell*cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell)
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    cell.textLabel.text=poi.name;
+    if ([_user.pointNo isEqualToString:[poi.customFields objectForKey:@"code"]])
+        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType=UITableViewCellAccessoryNone;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _poi=[_nearList objectAtIndex:indexPath.row];
+    [self updatePoint];
+    [self.tableView reloadData];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
